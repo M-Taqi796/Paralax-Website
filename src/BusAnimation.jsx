@@ -101,18 +101,17 @@ export default function BusAnimation() {
     };
   }, [imagesLoaded, images, frameIndex]);
 
-  // If loading, show spinner
-  if (imagesLoaded < TOTAL_FRAMES) {
-    return (
-      <div className="flex flex-col items-center justify-center h-screen w-full bg-white text-black">
-        <div className="w-12 h-12 border-4 border-[#2086BF]/20 border-t-[#2086BF] rounded-full animate-spin mb-4"></div>
-        <p className="text-[#2086BF]/70 tracking-tight">Loading Experience... {Math.round((imagesLoaded / TOTAL_FRAMES) * 100)}%</p>
-      </div>
-    );
-  }
-
   return (
-    <div ref={containerRef} className="relative h-[400vh] bg-transparent">
+    <>
+      {/* If loading, show spinner as an overlay */}
+      {imagesLoaded < TOTAL_FRAMES && (
+        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-white text-black">
+          <div className="w-12 h-12 border-4 border-[#2086BF]/20 border-t-[#2086BF] rounded-full animate-spin mb-4"></div>
+          <p className="text-[#2086BF]/70 tracking-tight">Loading Experience... {Math.round((imagesLoaded / TOTAL_FRAMES) * 100)}%</p>
+        </div>
+      )}
+
+      <div ref={containerRef} className="relative h-[400vh] bg-transparent">
       <div className="sticky top-0 h-screen w-full overflow-hidden">
         {/* Canvas for rendering images */}
         <canvas ref={canvasRef} className="absolute inset-0 w-full h-full object-contain" />
@@ -172,5 +171,6 @@ export default function BusAnimation() {
         </div>
       </div>
     </div>
+    </>
   );
 }
