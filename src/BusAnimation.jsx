@@ -1,7 +1,8 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { useScroll, useTransform, motion } from 'framer-motion';
 
-const TOTAL_FRAMES = 40;
+const TOTAL_FRAMES = 80;
+const BUS_FRAMES = 40;
 
 export default function BusAnimation() {
   const containerRef = useRef(null);
@@ -16,9 +17,15 @@ export default function BusAnimation() {
 
     for (let i = 1; i <= TOTAL_FRAMES; i++) {
       const img = new Image();
-      // Format number to 3 digits, e.g., 001
-      const frameNumber = i.toString().padStart(3, '0');
-      img.src = `/BusAnimation/ezgif-frame-${frameNumber}.webp`;
+      let src = '';
+      if (i <= BUS_FRAMES) {
+        const frameNumber = i.toString().padStart(3, '0');
+        src = `/BusAnimation/ezgif-frame-${frameNumber}.webp`;
+      } else {
+        const frameNumber = (i - BUS_FRAMES).toString().padStart(3, '0');
+        src = `/MobileAnimation/ezgif-frame-${frameNumber}.webp`;
+      }
+      img.src = src;
       img.onload = () => {
         loadedCount++;
         setImagesLoaded(loadedCount);
@@ -122,7 +129,7 @@ export default function BusAnimation() {
         </div>
       )}
 
-      <div ref={containerRef} className="relative h-[400vh] bg-transparent">
+      <div ref={containerRef} className="relative h-[800vh] bg-transparent">
         <div className="sticky top-0 h-screen w-full overflow-hidden">
           {/* Canvas for rendering images */}
           <canvas ref={canvasRef} className="absolute inset-0 w-full h-full object-contain" />
