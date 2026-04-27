@@ -50,8 +50,9 @@ export default function BusAnimation() {
 
     // Make canvas resize to match viewport while maintaining aspect ratio
     const updateCanvasSize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
       renderFrame(frameIndex.get());
     };
 
@@ -77,9 +78,9 @@ export default function BusAnimation() {
         renderWidth = canvas.width;
 
         // Make image wider on small screens to crop edges and zoom in slightly
-        if (canvas.width < 768) {
+        if (window.innerWidth < 768) {
           renderWidth = canvas.width * 1.8; // mobile: heavily crop sides to make bus larger
-        } else if (canvas.width < 1024) {
+        } else if (window.innerWidth < 1024) {
           renderWidth = canvas.width * 1.3; // tablet: crop slightly
         }
 
