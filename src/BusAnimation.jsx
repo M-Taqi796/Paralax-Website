@@ -18,7 +18,7 @@ export default function BusAnimation() {
       const img = new Image();
       // Format number to 3 digits, e.g., 001
       const frameNumber = i.toString().padStart(3, '0');
-      img.src = `/BusAnimation/ezgif-frame-${frameNumber}.png`;
+      img.src = `/BusAnimation/ezgif-frame-${frameNumber}.webp`;
       img.onload = () => {
         loadedCount++;
         setImagesLoaded(loadedCount);
