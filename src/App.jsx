@@ -1,12 +1,13 @@
-import './App.css'
+import React from 'react';
+import BusAnimation from './BusAnimation';
+import './App.css';
 
 function App() {
-
   return (
-    <>
-      <h1>Paralax Effect</h1>
-    </>
-  )
+    <div className="bg-white min-h-screen text-black font-sans">
+      <BusAnimation />
+    </div>
+  );
 }
 
-export default App
+export default App;

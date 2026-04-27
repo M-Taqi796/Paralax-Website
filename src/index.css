@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", "San Francisco", "Geist", system-ui, sans-serif;
+}
+
+body {
+  background-color: #ffffff;
+  margin: 0;
+  padding: 0;
+}
