@@ -73,15 +73,25 @@ export default function BusAnimation() {
       let y = 0;
 
       if (imgRatio > canvasRatio) {
-        // Image is wider than canvas
+        // Canvas is narrower than image (e.g. mobile/tablet)
         renderWidth = canvas.width;
+
+        // Make image wider on small screens to crop edges and zoom in slightly
+        if (canvas.width < 768) {
+          renderWidth = canvas.width * 1.8; // mobile: heavily crop sides to make bus larger
+        } else if (canvas.width < 1024) {
+          renderWidth = canvas.width * 1.3; // tablet: crop slightly
+        }
+
         renderHeight = renderWidth / imgRatio;
-        y = (canvas.height - renderHeight) / 2;
+        x = (canvas.width - renderWidth) / 2; // Center horizontally (crops equally from left/right)
+        y = 0; // Lock to top
       } else {
-        // Image is taller than canvas
+        // Canvas is wider than image (e.g. ultrawide)
         renderHeight = canvas.height;
         renderWidth = renderHeight * imgRatio;
         x = (canvas.width - renderWidth) / 2;
+        y = 0; // Lock to top
       }
 
       ctx.drawImage(currentImage, x, y, renderWidth, renderHeight);
@@ -105,7 +115,7 @@ export default function BusAnimation() {
     <>
       {/* If loading, show spinner as an overlay */}
       {imagesLoaded < TOTAL_FRAMES && (
-        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-transparent text-black">
+        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#d5d5d5] text-black">
           <div className="w-12 h-12 border-4 border-[#2086BF]/20 border-t-[#2086BF] rounded-full animate-spin mb-4"></div>
           <p className="text-[#2086BF]/70 tracking-tight">Loading Experience... {Math.round((imagesLoaded / TOTAL_FRAMES) * 100)}%</p>
         </div>
@@ -117,26 +127,26 @@ export default function BusAnimation() {
           <canvas ref={canvasRef} className="absolute inset-0 w-full h-full object-contain" />
 
           {/* Text Overlays Layer */}
-          <div className="absolute inset-0 pointer-events-none flex flex-col justify-center px-8 md:px-24">
+          <div className="absolute inset-0 pointer-events-none flex flex-col justify-center @container px-[var(--fluid-x)]">
 
             {/* 0% Scroll: Centered */}
             <motion.div
               className="absolute inset-0 flex items-center justify-center"
               style={{ opacity: opacity1 }}
             >
-              <div className="text-center bg-white/60 backdrop-blur-lg p-8 md:p-12 rounded-3xl border border-white/40 shadow-2xl">
-                <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-[#2086BF] mb-4">The Future of Movement</h1>
+              <div className="text-center bg-white/60 backdrop-blur-lg p-[var(--fluid-p)] rounded-3xl border border-white/40 shadow-2xl max-w-[min(100%,40rem)]">
+                <h1 className="text-[length:var(--fluid-h1)] font-bold tracking-tight text-[#2086BF] mb-4 leading-tight">The Future of Movement</h1>
               </div>
             </motion.div>
 
             {/* 30% Scroll: Left Aligned */}
             <motion.div
-              className="absolute left-8 md:left-24 top-1/2 -translate-y-1/2"
+              className="absolute inset-0 flex items-center justify-start"
               style={{ opacity: opacity2 }}
             >
-              <div className="max-w-md bg-white/60 backdrop-blur-lg p-8 md:p-10 rounded-3xl border border-white/40 shadow-2xl">
-                <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-[#2086BF] mb-4">Smart Transport System</h2>
-                <p className="text-lg text-[#2086BF]/70 tracking-tight leading-relaxed">
+              <div className="max-w-[min(100%,32rem)] bg-white/60 backdrop-blur-lg p-[var(--fluid-p)] rounded-3xl border border-white/40 shadow-2xl">
+                <h2 className="text-[length:var(--fluid-h2)] font-bold tracking-tight text-[#2086BF] mb-4 leading-tight">Smart Transport System</h2>
+                <p className="text-[length:var(--fluid-p)] text-[#2086BF]/70 tracking-tight leading-relaxed">
                   Seamlessly integrated modular design that separates for efficiency and expands for maximum utility.
                 </p>
               </div>
@@ -144,12 +154,12 @@ export default function BusAnimation() {
 
             {/* 60% Scroll: Right Aligned */}
             <motion.div
-              className="absolute right-8 md:right-24 top-1/2 -translate-y-1/2"
+              className="absolute inset-0 flex items-center justify-end"
               style={{ opacity: opacity3 }}
             >
-              <div className="max-w-md text-right ml-auto bg-white/60 backdrop-blur-lg p-8 md:p-10 rounded-3xl border border-white/40 shadow-2xl">
-                <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-[#2086BF] mb-4">Easse University Traveling</h2>
-                <p className="text-lg text-[#2086BF]/70 tracking-tight leading-relaxed">
+              <div className="max-w-[min(100%,32rem)] text-right bg-white/60 backdrop-blur-lg p-[var(--fluid-p)] rounded-3xl border border-white/40 shadow-2xl">
+                <h2 className="text-[length:var(--fluid-h2)] font-bold tracking-tight text-[#2086BF] mb-4 leading-tight">Easse University Traveling</h2>
+                <p className="text-[length:var(--fluid-p)] text-[#2086BF]/70 tracking-tight leading-relaxed">
                   Engineered from the inside out to handle the busiest campus routes with precision and elegance.
                 </p>
               </div>
@@ -160,9 +170,12 @@ export default function BusAnimation() {
               className="absolute inset-0 flex items-center justify-center"
               style={{ opacity: opacity4 }}
             >
-              <div className="text-center bg-white/60 backdrop-blur-lg p-8 md:p-12 rounded-3xl border border-white/40 shadow-2xl">
-                <h2 className="text-5xl md:text-7xl font-bold tracking-tight text-[#2086BF] mb-8">Ready to Ride?</h2>
-                <button className="pointer-events-auto px-8 py-4 bg-[#2086BF] text-white font-semibold rounded-full hover:bg-[#2086BF]/90 transition-colors text-lg tracking-tight">
+              <div className="text-center bg-white/60 backdrop-blur-lg p-[var(--fluid-p)] rounded-3xl border border-white/40 shadow-2xl max-w-[min(100%,40rem)]">
+                <h2 className="text-[length:var(--fluid-h1)] font-bold tracking-tight text-[#2086BF] mb-8 leading-tight">Ready to Ride?</h2>
+                <button
+                  className="pointer-events-auto px-8 py-4 min-h-[44px] min-w-[44px] bg-[#2086BF] text-white font-semibold rounded-full hover:bg-[#2086BF]/90 transition-all duration-300 ease-out text-[length:var(--fluid-p)] tracking-tight focus-visible:ring-4 focus-visible:ring-[#2086BF]/50 focus-visible:outline-none"
+                  aria-label="Download UniGo App"
+                >
                   Download App
                 </button>
               </div>
