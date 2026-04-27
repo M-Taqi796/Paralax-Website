@@ -4,7 +4,7 @@ import './App.css';
 
 function App() {
   return (
-    <div className="bg-white min-h-screen text-black font-sans">
+    <div className="bg-transparent min-h-screen text-black font-sans">
       <BusAnimation />
     </div>
   );
