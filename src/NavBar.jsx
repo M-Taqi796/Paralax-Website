@@ -15,16 +15,36 @@ export default function NavBar() {
 
   useEffect(() => {
     const featuresEl = document.getElementById('features-section');
+    const footerEl  = document.querySelector('footer');
     if (!featuresEl) return;
 
-    // Fire as soon as even 1px of the dark Features section enters the viewport
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsDark(entry.isIntersecting),
+    // Track which sections are currently intersecting the viewport
+    let featuresVisible = false;
+    let footerVisible   = false;
+
+    const update = () => setIsDark(featuresVisible && !footerVisible);
+
+    // Watch the dark Features section
+    const featuresObserver = new IntersectionObserver(
+      ([entry]) => { featuresVisible = entry.isIntersecting; update(); },
       { threshold: 0 }
     );
+    featuresObserver.observe(featuresEl);
 
-    observer.observe(featuresEl);
-    return () => observer.disconnect();
+    // Watch the light Footer — when it appears, flip back to dark text
+    let footerObserver = null;
+    if (footerEl) {
+      footerObserver = new IntersectionObserver(
+        ([entry]) => { footerVisible = entry.isIntersecting; update(); },
+        { threshold: 0 }
+      );
+      footerObserver.observe(footerEl);
+    }
+
+    return () => {
+      featuresObserver.disconnect();
+      footerObserver?.disconnect();
+    };
   }, []);
 
   // Dynamic colour tokens — transition smoothly over 300 ms

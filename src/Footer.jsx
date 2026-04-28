@@ -2,9 +2,9 @@ import React from 'react';
 
 const FOOTER_LINKS = [
   { label: 'About', href: '#' },
-  { label: 'Contact Us', href: '#' },
+  { label: 'Contact', href: '#' },
   { label: 'Privacy Policy', href: '#' },
-  { label: 'Terms and Conditions', href: '#' },
+  { label: 'Terms & Conditions', href: '#' },
 ];
 
 export default function Footer() {
