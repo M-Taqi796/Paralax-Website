@@ -158,14 +158,14 @@ export default function BusAnimation() {
           <div className="absolute inset-0 pointer-events-none flex flex-col justify-center @container px-[var(--fluid-x)]">
 
             {/* 0% Scroll: Centered */}
-            <motion.div
+            {/* <motion.div
               className="absolute inset-0 flex items-center justify-center"
               style={{ opacity: opacity1 }}
             >
               <div className="text-center bg-white/60 backdrop-blur-lg p-[var(--fluid-p)] rounded-3xl border border-white/40 shadow-2xl max-w-[min(100%,40rem)]">
-                <h1 className="text-[length:var(--fluid-h1)] lg:text-5xl lg:leading-tight font-bold tracking-tight text-[#2086BF] mb-4 leading-tight">UniGo - Travel Smart</h1>
+                <h1 className="text-[length:var(--fluid-h1)] lg:text-5xl lg:leading-tight font-bold tracking-tight text-[#2086BF] mb-4 leading-tight">Smart Transport System</h1>
               </div>
-            </motion.div>
+            </motion.div> */}
 
             {/* 30% Scroll: Left Aligned */}
             <motion.div

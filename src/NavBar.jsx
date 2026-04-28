@@ -83,11 +83,11 @@ export default function NavBar() {
       {/* Curved bottom line — bow arc that fades at both edges */}
       <div className="pointer-events-none w-full overflow-hidden" aria-hidden="true">
         <svg
-          viewBox="0 0 1200 24"
+          viewBox="0 0 1200 50"
           preserveAspectRatio="none"
           xmlns="http://www.w3.org/2000/svg"
           className="w-full"
-          style={{ height: '16px' }}
+          style={{ height: '30px' }}
         >
           <defs>
             <linearGradient id="bowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -98,12 +98,12 @@ export default function NavBar() {
               <stop offset="100%" stopColor={arcColor} stopOpacity="0" />
             </linearGradient>
           </defs>
-          {/* Bow / arc: starts at left edge, curves down to centre, back up to right */}
+          {/* Bow arch: both edges droop to y=46, smooth peak stays at y=5 */}
           <path
-            d="M 0,2 Q 600,22 1200,2"
+            d="M 0,46 C 350,5 850,5 1200,46"
             fill="none"
             stroke="url(#bowGrad)"
-            strokeWidth="1.5"
+            strokeWidth="1.8"
           />
         </svg>
       </div>
