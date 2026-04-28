@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { useTransform, motion, useMotionValue } from 'framer-motion';
+import PrimaryButton from './PrimaryButton';
 
 const TOTAL_FRAMES = 80;
 const BUS_FRAMES = 40;
@@ -199,12 +200,9 @@ export default function BusAnimation() {
             >
               <div className="text-center bg-white/60 backdrop-blur-lg p-[var(--fluid-p)] rounded-3xl border border-white/40 shadow-2xl max-w-[min(100%,40rem)]">
                 <h2 className="text-[length:var(--fluid-h1)] lg:text-5xl lg:leading-tight font-bold tracking-tight text-[#2086BF] mb-8 leading-tight">Ready to Ride?</h2>
-                <button
-                  className="pointer-events-auto px-8 py-4 min-h-[44px] min-w-[44px] bg-[#2086BF] text-white font-semibold rounded-full hover:bg-[#2086BF]/90 transition-all duration-300 ease-out text-[length:var(--fluid-p)] lg:text-base tracking-tight focus-visible:ring-4 focus-visible:ring-[#2086BF]/50 focus-visible:outline-none"
-                  aria-label="Download UniGo App"
-                >
+                <PrimaryButton ariaLabel="Download UniGo App">
                   Download App
-                </button>
+                </PrimaryButton>
               </div>
             </motion.div>
 
