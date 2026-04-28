@@ -51,8 +51,8 @@ export default function Footer() {
       {/* ── Tagline ── */}
       <div className="px-4 sm:px-8 pb-8 sm:pb-10 text-center">
         <p className="text-[11px] sm:text-xs text-gray-400 leading-relaxed max-w-2xl mx-auto">
-          UniGo is a smart AI-powered university transport management platform — bringing real-time bus tracking,
-          intelligent seat prediction, QR boarding, and seamless fee management to every campus commute.
+          UniGo is a smart AI-powered university transport assistant — bringing real-time bus tracking,
+          intelligent seat prediction, QR boarding, and easy fee challan generation to every campus commute.
         </p>
       </div>
 
