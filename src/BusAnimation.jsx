@@ -162,7 +162,7 @@ export default function BusAnimation() {
               style={{ opacity: opacity1 }}
             >
               <div className="text-center bg-white/60 backdrop-blur-lg p-[var(--fluid-p)] rounded-3xl border border-white/40 shadow-2xl max-w-[min(100%,40rem)]">
-                <h1 className="text-[length:var(--fluid-h1)] lg:text-5xl lg:leading-tight font-bold tracking-tight text-[#2086BF] mb-4 leading-tight">The Future of Movement</h1>
+                <h1 className="text-[length:var(--fluid-h1)] lg:text-5xl lg:leading-tight font-bold tracking-tight text-[#2086BF] mb-4 leading-tight">UniGo - Travel Smart</h1>
               </div>
             </motion.div>
 
@@ -172,9 +172,9 @@ export default function BusAnimation() {
               style={{ opacity: opacity2 }}
             >
               <div className="max-w-[min(100%,32rem)] bg-white/60 backdrop-blur-lg p-[var(--fluid-p)] rounded-3xl border border-white/40 shadow-2xl">
-                <h2 className="text-[length:var(--fluid-h2)] lg:text-4xl lg:leading-tight font-bold tracking-tight text-[#2086BF] mb-4 leading-tight">Smart Transport System</h2>
+                <h2 className="text-[length:var(--fluid-h2)] lg:text-4xl lg:leading-tight font-bold tracking-tight text-[#2086BF] mb-4 leading-tight">Smart AI Seat Prediction</h2>
                 <p className="text-[length:var(--fluid-p)] lg:text-base text-[#2086BF]/70 tracking-tight leading-relaxed">
-                  Seamlessly integrated modular design that separates for efficiency and expands for maximum utility.
+                  Using AI to predict seat availability, ensuring students find a seat without hassle.
                 </p>
               </div>
             </motion.div>
@@ -185,9 +185,9 @@ export default function BusAnimation() {
               style={{ opacity: opacity3 }}
             >
               <div className="max-w-[min(100%,32rem)] text-right bg-white/60 backdrop-blur-lg p-[var(--fluid-p)] rounded-3xl border border-white/40 shadow-2xl">
-                <h2 className="text-[length:var(--fluid-h2)] lg:text-4xl lg:leading-tight font-bold tracking-tight text-[#2086BF] mb-4 leading-tight">Easse University Traveling</h2>
+                <h2 className="text-[length:var(--fluid-h2)] lg:text-4xl lg:leading-tight font-bold tracking-tight text-[#2086BF] mb-4 leading-tight">Smart AI Route Redirection</h2>
                 <p className="text-[length:var(--fluid-p)] lg:text-base text-[#2086BF]/70 tracking-tight leading-relaxed">
-                  Engineered from the inside out to handle the busiest campus routes with precision and elegance.
+                  Dynamic route adjustments based on demand and traffic, ensuring timely arrivals and departures.
                 </p>
               </div>
             </motion.div>
