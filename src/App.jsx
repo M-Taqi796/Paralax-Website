@@ -2,6 +2,7 @@ import React from 'react';
 import NavBar from './NavBar';
 import BusAnimation from './BusAnimation';
 import Features from './Features';
+import Footer from './Footer';
 import './App.css';
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
       <NavBar />
       <BusAnimation />
       <Features />
+      <Footer />
     </div>
   );
 }
