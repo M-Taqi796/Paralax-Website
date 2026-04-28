@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PrimaryButton from './PrimaryButton';
 
 const NAV_LINKS = [
@@ -10,6 +10,35 @@ const NAV_LINKS = [
 
 export default function NavBar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  // true when the navbar is sitting over a dark-background section (Features)
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    const featuresEl = document.getElementById('features-section');
+    if (!featuresEl) return;
+
+    // Fire as soon as even 1px of the dark Features section enters the viewport
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsDark(entry.isIntersecting),
+      { threshold: 0 }
+    );
+
+    observer.observe(featuresEl);
+    return () => observer.disconnect();
+  }, []);
+
+  // Dynamic colour tokens — transition smoothly over 300 ms
+  const linkClass = `text-sm lg:text-base font-medium tracking-tight whitespace-nowrap
+    transition-colors duration-300 ease-in-out
+    ${isDark
+      ? 'text-white/90 hover:text-white'
+      : 'text-gray-700 hover:text-[#2086BF]'
+    }`;
+
+  const hamburgerBarClass = `block w-6 h-0.5 transition-all duration-300 origin-center
+    ${isDark ? 'bg-white/90' : 'bg-gray-700'}`;
+
+  const arcColor = isDark ? '#ffffff' : '#6b7280';
 
   return (
     <nav
@@ -31,11 +60,7 @@ export default function NavBar() {
         {/* Desktop links + CTA */}
         <div className="hidden md:flex items-center gap-6 lg:gap-8">
           {NAV_LINKS.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="text-sm lg:text-base font-medium text-gray-700 hover:text-[#2086BF] transition-colors duration-200 tracking-tight whitespace-nowrap"
-            >
+            <a key={link.label} href={link.href} className={linkClass}>
               {link.label}
             </a>
           ))}
@@ -49,19 +74,13 @@ export default function NavBar() {
           aria-expanded={menuOpen}
           onClick={() => setMenuOpen((prev) => !prev)}
         >
-          <span
-            className={`block w-6 h-0.5 bg-gray-700 transition-transform duration-300 origin-center ${menuOpen ? 'translate-y-2 rotate-45' : ''}`}
-          />
-          <span
-            className={`block w-6 h-0.5 bg-gray-700 transition-opacity duration-300 ${menuOpen ? 'opacity-0' : ''}`}
-          />
-          <span
-            className={`block w-6 h-0.5 bg-gray-700 transition-transform duration-300 origin-center ${menuOpen ? '-translate-y-2 -rotate-45' : ''}`}
-          />
+          <span className={`${hamburgerBarClass} ${menuOpen ? 'translate-y-2 rotate-45' : ''}`} />
+          <span className={`${hamburgerBarClass} ${menuOpen ? 'opacity-0' : ''}`} />
+          <span className={`${hamburgerBarClass} ${menuOpen ? '-translate-y-2 -rotate-45' : ''}`} />
         </button>
       </div>
 
-      {/* Curved bottom line — SVG arc that fades at both edges */}
+      {/* Curved bottom line — bow arc that fades at both edges */}
       <div className="pointer-events-none w-full overflow-hidden" aria-hidden="true">
         <svg
           viewBox="0 0 1200 24"
@@ -72,11 +91,11 @@ export default function NavBar() {
         >
           <defs>
             <linearGradient id="bowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#6b7280" stopOpacity="0" />
-              <stop offset="20%" stopColor="#6b7280" stopOpacity="0.35" />
-              <stop offset="50%" stopColor="#6b7280" stopOpacity="0.5" />
-              <stop offset="80%" stopColor="#6b7280" stopOpacity="0.35" />
-              <stop offset="100%" stopColor="#6b7280" stopOpacity="0" />
+              <stop offset="0%"   stopColor={arcColor} stopOpacity="0" />
+              <stop offset="20%"  stopColor={arcColor} stopOpacity="0.35" />
+              <stop offset="50%"  stopColor={arcColor} stopOpacity="0.5" />
+              <stop offset="80%"  stopColor={arcColor} stopOpacity="0.35" />
+              <stop offset="100%" stopColor={arcColor} stopOpacity="0" />
             </linearGradient>
           </defs>
           {/* Bow / arc: starts at left edge, curves down to centre, back up to right */}

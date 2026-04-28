@@ -57,7 +57,7 @@ export default function Features() {
   const cardsX = useTransform(scrollYProgress, [0.15, 1], ["110vw", "-550vw"]);
 
   return (
-    <div ref={targetRef} className="relative h-[600vh] w-full z-10" style={{ background: '#0d1f2d' }}>
+    <div id="features-section" ref={targetRef} className="relative h-[600vh] w-full z-10" style={{ background: '#0d1f2d' }}>
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
 
         {/* Tech Circuit Board Texture Background */}
