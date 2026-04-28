@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { useScroll, useTransform, motion } from 'framer-motion';
+import { useTransform, motion, useMotionValue } from 'framer-motion';
 
 const TOTAL_FRAMES = 80;
 const BUS_FRAMES = 40;
@@ -35,10 +35,29 @@ export default function BusAnimation() {
     setImages(loadedImages);
   }, []);
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
-  });
+  // Manually compute scroll progress scoped to THIS container only.
+  // scrollYProgress = 0 when container top hits viewport top,
+  // scrollYProgress = 1 when container bottom hits viewport bottom.
+  const scrollYProgress = useMotionValue(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const containerH = containerRef.current.offsetHeight;
+      const viewportH = window.innerHeight;
+      // Total scrollable distance within this component
+      const scrollRange = containerH - viewportH;
+      // How far the top of the container is above the viewport top (negative = scrolled past)
+      const scrolled = -rect.top;
+      const progress = Math.min(1, Math.max(0, scrolled / scrollRange));
+      scrollYProgress.set(progress);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // initialise on mount
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [scrollYProgress]);
 
   // Map scroll progress to frame index
   const frameIndex = useTransform(scrollYProgress, [0, 1], [0, TOTAL_FRAMES - 1]);
