@@ -48,15 +48,13 @@ export default function Features() {
     offset: ["start start", "end end"]
   });
 
-  // Animate heading from center to top
+  // Heading: fades & slides up to make room for cards
   const headingY = useTransform(scrollYProgress, [0, 0.15], ["0vh", "-35vh"]);
-  const headingScale = useTransform(scrollYProgress, [0, 0.15], [1, 0.7]);
-  const headingOpacity = useTransform(scrollYProgress, [0, 0.05, 0.15], [0, 1, 1]); // Fades in if needed
+  const headingScale = useTransform(scrollYProgress, [0, 0.15], [1, 0.75]);
+  const headingOpacity = useTransform(scrollYProgress, [0, 0.05, 0.15], [0, 1, 1]);
 
-  // Animate cards sliding from right to left
-  const cardsX = useTransform(scrollYProgress, [0.15, 1], ["100vw", "-200vw"]);
-
-
+  // Cards: slide from right to left — generous range for all screen sizes
+  const cardsX = useTransform(scrollYProgress, [0.15, 1], ["110vw", "-550vw"]);
 
   return (
     <div ref={targetRef} className="relative h-[600vh] w-full z-10" style={{ background: '#0d1f2d' }}>
@@ -70,34 +68,30 @@ export default function Features() {
         >
           <defs>
             <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
-              <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#64b1deff" strokeWidth="0.5" />
+              <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#64b1de" strokeWidth="0.5" />
             </pattern>
             <pattern id="dots" width="60" height="60" patternUnits="userSpaceOnUse">
-              <circle cx="0" cy="0" r="1.5" fill="#64b1deff" />
-              <circle cx="60" cy="0" r="1.5" fill="#64b1deff" />
-              <circle cx="0" cy="60" r="1.5" fill="#64b1deff" />
-              <circle cx="60" cy="60" r="1.5" fill="#64b1deff" />
-              <circle cx="30" cy="30" r="1" fill="#64b1deff" />
+              <circle cx="0"  cy="0"  r="1.5" fill="#64b1de" />
+              <circle cx="60" cy="0"  r="1.5" fill="#64b1de" />
+              <circle cx="0"  cy="60" r="1.5" fill="#64b1de" />
+              <circle cx="60" cy="60" r="1.5" fill="#64b1de" />
+              <circle cx="30" cy="30" r="1"   fill="#64b1de" />
             </pattern>
-            {/* Circuit lines */}
             <pattern id="circuits" width="180" height="180" patternUnits="userSpaceOnUse">
-              {/* Horizontal traces */}
-              <line x1="0" y1="30" x2="60" y2="30" stroke="#64b1deff" strokeWidth="1" />
-              <line x1="120" y1="30" x2="180" y2="30" stroke="#64b1deff" strokeWidth="1" />
-              <line x1="0" y1="150" x2="90" y2="150" stroke="#64b1deff" strokeWidth="1" />
-              <line x1="90" y1="90" x2="180" y2="90" stroke="#64b1deff" strokeWidth="1" />
-              {/* Vertical traces */}
-              <line x1="60" y1="0" x2="60" y2="30" stroke="#64b1deff" strokeWidth="1" />
-              <line x1="60" y1="30" x2="60" y2="90" stroke="#64b1deff" strokeWidth="1" />
-              <line x1="90" y1="90" x2="90" y2="150" stroke="#64b1deff" strokeWidth="1" />
-              <line x1="120" y1="0" x2="120" y2="30" stroke="#64b1deff" strokeWidth="1" />
-              <line x1="30" y1="150" x2="30" y2="180" stroke="#64b1deff" strokeWidth="1" />
-              {/* Nodes (pads) */}
-              <circle cx="60" cy="30" r="3.5" fill="none" stroke="#64b1deff" strokeWidth="1" />
-              <circle cx="90" cy="90" r="3.5" fill="none" stroke="#64b1deff" strokeWidth="1" />
-              <circle cx="120" cy="30" r="3.5" fill="none" stroke="#64b1deff" strokeWidth="1" />
-              <circle cx="30" cy="150" r="3.5" fill="none" stroke="#64b1deff" strokeWidth="1" />
-              <circle cx="90" cy="150" r="3.5" fill="none" stroke="#64b1deff" strokeWidth="1" />
+              <line x1="0"   y1="30"  x2="60"  y2="30"  stroke="#64b1de" strokeWidth="1" />
+              <line x1="120" y1="30"  x2="180" y2="30"  stroke="#64b1de" strokeWidth="1" />
+              <line x1="0"   y1="150" x2="90"  y2="150" stroke="#64b1de" strokeWidth="1" />
+              <line x1="90"  y1="90"  x2="180" y2="90"  stroke="#64b1de" strokeWidth="1" />
+              <line x1="60"  y1="0"   x2="60"  y2="30"  stroke="#64b1de" strokeWidth="1" />
+              <line x1="60"  y1="30"  x2="60"  y2="90"  stroke="#64b1de" strokeWidth="1" />
+              <line x1="90"  y1="90"  x2="90"  y2="150" stroke="#64b1de" strokeWidth="1" />
+              <line x1="120" y1="0"   x2="120" y2="30"  stroke="#64b1de" strokeWidth="1" />
+              <line x1="30"  y1="150" x2="30"  y2="180" stroke="#64b1de" strokeWidth="1" />
+              <circle cx="60"  cy="30"  r="3.5" fill="none" stroke="#64b1de" strokeWidth="1" />
+              <circle cx="90"  cy="90"  r="3.5" fill="none" stroke="#64b1de" strokeWidth="1" />
+              <circle cx="120" cy="30"  r="3.5" fill="none" stroke="#64b1de" strokeWidth="1" />
+              <circle cx="30"  cy="150" r="3.5" fill="none" stroke="#64b1de" strokeWidth="1" />
+              <circle cx="90"  cy="150" r="3.5" fill="none" stroke="#64b1de" strokeWidth="1" />
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#grid)" />
@@ -113,42 +107,56 @@ export default function Features() {
           }}
         />
 
-
         {/* Animated Heading */}
         <motion.div
           style={{ y: headingY, scale: headingScale, opacity: headingOpacity }}
-          className="absolute z-20 flex justify-center w-full px-[var(--fluid-x)]"
+          className="absolute z-20 flex justify-center w-full px-4 sm:px-8 md:px-[var(--fluid-x)]"
         >
-          <h2 className="text-[length:var(--fluid-h1)] lg:text-7xl lg:leading-none font-bold tracking-tight text-[#2086BF] text-center bg-[#ffffff] px-12 py-4 rounded-full border border-white/50 shadow-2xl">
+          <h2 className="
+            font-bold tracking-tight text-[#2086BF] text-center
+            bg-[#ffffff] rounded-full border border-white/50 shadow-2xl
+            whitespace-nowrap
+            text-xl sm:text-3xl lg:text-5xl
+            px-6 sm:px-10 py-2 sm:py-4
+          ">
             App Features
           </h2>
         </motion.div>
 
-        {/* Horizontal Scrolling Cards Container */}
+        {/* Horizontal Scrolling Cards */}
         <motion.div
           style={{ x: cardsX }}
-          className="absolute flex gap-8 md:gap-16 items-center pt-24 px-8 md:px-[10vw]"
+          className="absolute flex gap-5 sm:gap-8 lg:gap-10 items-center"
         >
           {features.map((feature) => {
             const Icon = feature.icon;
             return (
               <div
                 key={feature.id}
-                className="w-[85vw] max-w-sm md:w-[400px] h-auto shrink-0 bg-[#ffffff] rounded-[2.5rem] border border-white/50 shadow-2xl p-10 flex flex-col items-center text-center hover:-translate-y-4 transition-transform duration-500 ease-out"
+                className="
+                  shrink-0 bg-[#ffffff] rounded-[2rem] border border-white/50 shadow-2xl
+                  flex flex-col items-center text-center
+                  hover:-translate-y-3 transition-transform duration-500 ease-out
+                  w-[80vw] sm:w-[55vw] md:w-[40vw] lg:w-[28vw] xl:w-[20vw]
+                  max-w-[320px]
+                  p-6 sm:p-8 lg:p-10
+                  gap-3 sm:gap-5
+                "
               >
-                <div className="w-24 h-24 rounded-full bg-[#2086BF]/10 flex items-center justify-center mb-8 shadow-inner border border-[#2086BF]/20">
-                  <Icon className="w-12 h-12 text-[#2086BF]" strokeWidth={1.5} />
+                {/* Icon */}
+                <div className="w-14 h-14 sm:w-18 sm:h-18 lg:w-20 lg:h-20 rounded-full bg-[#2086BF]/10 flex items-center justify-center shadow-inner border border-[#2086BF]/20 shrink-0">
+                  <Icon className="w-7 h-7 sm:w-9 sm:h-9 lg:w-11 lg:h-11 text-[#2086BF]" strokeWidth={1.5} />
                 </div>
 
-                <h3 className="text-[length:var(--fluid-h2)] lg:text-3xl font-bold tracking-tight text-[#2086BF] mb-4 leading-tight">
+                {/* Title */}
+                <h3 className="text-sm sm:text-lg lg:text-xl font-bold tracking-tight text-[#2086BF] leading-tight">
                   {feature.title}
                 </h3>
 
-                <p className="text-[length:var(--fluid-p)] lg:text-base text-[#2086BF]/70 tracking-tight leading-relaxed">
+                {/* Description */}
+                <p className="text-xs sm:text-sm lg:text-sm text-[#2086BF]/70 tracking-tight leading-relaxed">
                   {feature.description}
                 </p>
-
-
               </div>
             );
           })}
