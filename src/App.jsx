@@ -1,4 +1,5 @@
 import React from 'react';
+import { ReactLenis } from 'lenis/react';
 import NavBar from './NavBar';
 import BusAnimation from './BusAnimation';
 import Features from './Features';
@@ -7,12 +8,14 @@ import './App.css';
 
 function App() {
   return (
-    <div className="bg-transparent min-h-screen text-black font-sans">
-      <NavBar />
-      <BusAnimation />
-      <Features />
-      <Footer />
-    </div>
+    <ReactLenis root options={{ lerp: 0.05, duration: 1.5, smoothWheel: true }}>
+      <div className="bg-transparent min-h-screen text-black font-sans">
+        <NavBar />
+        <BusAnimation />
+        <Features />
+        <Footer />
+      </div>
+    </ReactLenis>
   );
 }
 

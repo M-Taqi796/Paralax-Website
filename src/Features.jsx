@@ -56,14 +56,14 @@ function StackedCard({ feature, index, scrollYProgress }) {
   let scaleOutput = [];
   let opacityOutput = [];
 
-  if (index === TOTAL - 1) { 
+  if (index === TOTAL - 1) {
     input = [startEnter, fullyEntered, 1];
     yOutput = [1200, 0, 0];
     scaleOutput = [1, 1, 1];
     opacityOutput = [1, 1, 1];
   } else {
     input = [startEnter, fullyEntered, startExit, 1];
-    yOutput = [1200, 0, -40, -80]; 
+    yOutput = [1200, 0, -40, -80];
     scaleOutput = [1, 1, 0.93, 0.85];
     opacityOutput = [1, 1, 1, 1];
   }
@@ -85,15 +85,15 @@ function StackedCard({ feature, index, scrollYProgress }) {
         flex flex-col-reverse sm:flex-row items-center justify-between gap-8 sm:gap-12
         relative overflow-hidden
       "
-      style={{
-        background: 'linear-gradient(135deg, #102a3a 0%, #07131b 100%)',
-        border: '1px solid rgba(91,188,230,0.2)',
-        boxShadow: '0 30px 80px -20px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.05)'
-      }}
+        style={{
+          background: 'linear-gradient(135deg, #102a3a 0%, #07131b 100%)',
+          border: '1px solid rgba(91,188,230,0.2)',
+          boxShadow: '0 30px 80px -20px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.05)'
+        }}
       >
         {/* Background Accent Glow inside the card */}
         <div className="absolute -top-40 -right-40 w-[400px] h-[400px] bg-[#2086BF]/20 rounded-full blur-[100px] pointer-events-none" />
-        
+
         {/* Left: Text Content */}
         <div className="flex flex-col gap-4 sm:gap-6 w-full sm:w-[55%] z-10 relative">
           <div className="flex items-center gap-4">
@@ -109,21 +109,21 @@ function StackedCard({ feature, index, scrollYProgress }) {
             {feature.description}
           </p>
         </div>
-        
+
         {/* Right: Visual representation */}
         <div className="relative w-full sm:w-[45%] h-[200px] sm:h-full flex items-center justify-center">
           {/* Orbital rings */}
-          <motion.div 
+          <motion.div
             className="absolute w-[220px] h-[220px] sm:w-[320px] sm:h-[320px] rounded-full border border-[#5bbce6]/10"
             animate={{ rotate: 360 }}
             transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
           />
-          <motion.div 
+          <motion.div
             className="absolute w-[180px] h-[180px] sm:w-[240px] sm:h-[240px] rounded-full border border-dashed border-[#2086BF]/30"
             animate={{ rotate: -360 }}
             transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
           />
-          
+
           {/* The Icon */}
           <div className="relative w-24 h-24 sm:w-32 sm:h-32 rounded-[2rem] bg-gradient-to-br from-[#1a3f58] to-[#0a1924] border border-[#5bbce6]/20 flex items-center justify-center shadow-[0_0_50px_rgba(32,134,191,0.2)]">
             <feature.icon className="w-12 h-12 sm:w-16 sm:h-16 text-[#5bbce6] drop-shadow-[0_0_15px_rgba(91,188,230,0.4)]" strokeWidth={1.5} />
@@ -142,21 +142,21 @@ function ProgressDots({ scrollYProgress }) {
         const start = index * STEP;
         const fully = (index + 1) * STEP;
         const exit = (index + 2) * STEP;
-        
+
         let input = [start, fully, exit];
         let output = [0.2, 1, 0.2];
-        
+
         if (index === TOTAL - 1) {
           input = [start, fully, 1];
           output = [0.2, 1, 1];
         }
-        
+
         const opacity = useTransform(scrollYProgress, input, output);
         const scale = useTransform(scrollYProgress, input, [0.8, 1.3, 0.8]);
         const backgroundColor = useTransform(scrollYProgress, input, ['#ffffff', '#5bbce6', '#ffffff']);
-        
+
         return (
-          <motion.div 
+          <motion.div
             key={index}
             className="w-2.5 h-2.5 rounded-full"
             style={{ scale, opacity, backgroundColor }}
@@ -193,8 +193,8 @@ export default function Features() {
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
 
         {/* ── Parallax Circuit Background ── */}
-        <motion.div 
-          className="absolute inset-0 w-full h-[120%] pointer-events-none" 
+        <motion.div
+          className="absolute inset-0 w-full h-[120%] pointer-events-none"
           style={{ y: bgY }}
         >
           <svg className="w-full h-full opacity-[0.06]" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
